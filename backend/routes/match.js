@@ -38,8 +38,8 @@ router.post("/", async (req, res) => {
                 // Match if they have at least 1 shared interest
                 if (sharedInterests.length > 0) {
                     matchedPairs.push({
-                        user1Id: user1.id,
-                        user2Id: user2.id,
+                        user1_id: user1.id,
+                        user2_id: user2.id,
                         commonInterests: sharedInterests
                     });
                 }

@@ -4,12 +4,15 @@ import NameForm from "./components/NameForm";
 import CompatibilityQuestions from "./components/CompatibilityQuestions";
 import ConfirmationPage from "./components/ConfirmationPage";
 import { supabase } from "../supabase"; // Ensure correct import
+import PreferenceQuestions from "./components/PreferenceQuestions";
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [step, setStep] = useState("login"); // Default step
   const [firstName, setFirstName] = useState(""); // Store first name
   const [lastName, setLastName] = useState(""); // Store last name
+  const [number, setNumber] = useState(""); // Store number
+  const [preferences, setPreferences] = useState([]); // Store preferences
   const [interests, setInterests] = useState([]); // Store interests
 
   useEffect(() => {
@@ -41,6 +44,11 @@ export default function App() {
     };
   }, []);
 
+  const handlePreferenceSubmit = async (finalPreferences) => {
+    setPreferences(finalPreferences);
+    setStep("compatibility");
+  }
+
   const handleFormSubmit = async (finalInterests) => {
     setInterests(finalInterests);
 
@@ -63,6 +71,8 @@ export default function App() {
         body: JSON.stringify({
           firstName,
           lastName,
+          number,
+          preferences: preferences,
           interests: finalInterests, // Send name and interests together
         }),
       });
@@ -81,12 +91,14 @@ export default function App() {
     <div className="bg-[#FAC2CD] font-luckiest">
       {step === "login" && <Login onLogin={() => setStep("name")} />}
       {step === "name" && (
-        <NameForm onSubmit={(fname, lname) => { 
+        <NameForm onSubmit={(fname, lname, number) => { 
           setFirstName(fname); 
-          setLastName(lname); 
-          setStep("compatibility"); 
+          setLastName(lname);
+          setNumber(number);
+          setStep("preferences");
         }} />
       )}
+      {step === "preferences" && <PreferenceQuestions onComplete={handlePreferenceSubmit} />}
       {step === "compatibility" && (
         <CompatibilityQuestions 
           onComplete={handleFormSubmit} // Send everything together

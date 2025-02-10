@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function NameForm({ onSubmit }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [number, setNumber] = useState("");
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
@@ -21,8 +22,15 @@ export default function NameForm({ onSubmit }) {
         onChange={(e) => setLastName(e.target.value)}
         className="p-2 border border-gray-300 rounded mb-4"
       />
+      <input
+        type="text"
+        placeholder="Whatsapp Number"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        className="p-2 border border-gray-300 rounded mb-4"
+      />
       <button
-        onClick={() => onSubmit(firstName, lastName)}
+        onClick={() => onSubmit(firstName, lastName, number)}
         className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
       >
         Next

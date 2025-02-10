@@ -4,29 +4,48 @@ import { supabase } from "../../supabase";
 export default function CompatibilityQuestions({ onComplete, firstName, lastName }) {
     const questions = [
         {
-            question: "What's your ideal date?",
-            options: ["Dinner", "Movie", "Adventure", "Stay Home"],
+            question: "What are you: Introvert, extrovert, or ambivert?",
+            options: ["Introvert", "Extrovert", "Ambivert"],
         },
         {
-            question: "Favorite romantic movie?",
-            options: [
-                "Titanic",
-                "Notebook",
-                "La La Land",
-                "A Walk to Remember",
-            ],
-        },
-        {
-            question: "Do you believe in love at first sight?",
-            options: ["Yes", "No", "Maybe"],
+            question: "Pick your ideal date:",
+            options: ["A cozy coffee shop date", "A spontaneous road trip", "A movie & dinner night", "A fun gaming night"],
         },
         {
             question: "What's your love language?",
-            options: ["Words", "Gifts", "Time", "Touch"],
+            options: ["Words of affirmation", "Physical touch", "Quality time", "Acts of service", "Gift-giving"],
         },
         {
-            question: "Dream honeymoon destination?",
-            options: ["Paris", "Bali", "Maldives", "Switzerland"],
+            question: "Are you more of a texter or a caller?",
+            options: ["Texting all the way", "Calling, I love real convos", "Depends on my mood", "In-Person or nothing😭"],
+        },
+        {
+            question: "Do you believe in love at first sight?",
+            options: ["Yes, 100%!", "Maybe, if the connection is strong", "No, love takes time"],
+        },
+        {
+            question: "What's your ideal Sunday?",
+            options: ["Sleeping in & chilling at home", "Exploring new places & trying new food", "Reading a book & sipping coffee", "Watching Netflix & gaming"],
+        },
+        {
+            question: "Are you a..",
+            options: ["Movie person?", "Music Person?", "Novel delulu?", "lost in Literature?"],
+        },
+        {
+            question: "You see your crush in college. What would you do?",
+            options: ["Smile & wait for them to notice me", "Walk up and start a random convo", "Text them something flirty later", " Admire, maybe overthink, and do nothing😅"],
+        },
+        {
+            question: "What's your biggest turn-on in a partner?",
+            options: ["Confidence & intelligence", "Kindness & emotional maturity", "Sense of humor & fun vibes", "Loyalty & deep conversations"],
+        },
+        {
+            question: "What's your relationship goal?",
+            options: [" Something casual & fun", "Serious & long-term", "Open to whatever feels right"],
+        },
+        {
+            question: "How do you like to handle conflicts in relationships?",
+            options: ["Talk it out immediately", "Need time to think", " Prefer a calm discussion"],
         },
     ];
 
@@ -45,12 +64,6 @@ export default function CompatibilityQuestions({ onComplete, firstName, lastName
         }
       };
       
-      
-      
-      
-      
-      
-
     if (loading) {
         return <div>Submitting, please wait...</div>;
     }

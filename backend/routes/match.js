@@ -1,6 +1,6 @@
 import express from "express";
 import { supabase } from "../db.js";
-import findMatches from "./matchnew.js";
+import findMatches from "./match_helper.js";
 
 const router = express.Router();
 

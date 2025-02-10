@@ -52,7 +52,7 @@ export default function App() {
   const handleFormSubmit = async (finalInterests) => {
     setInterests(finalInterests);
 
-    console.log("📌 Submitting Full Data:", { firstName, lastName, interests: finalInterests });
+    // console.log("📌 Submitting Full Data:", { firstName, lastName, number, interests: finalInterests });
 
     try {
       const { data: { session } } = await supabase.auth.getSession();
@@ -78,7 +78,7 @@ export default function App() {
       });
 
       const result = await response.json();
-      console.log("✅ API Response:", result);
+      // console.log("✅ API Response:", result);
 
       setStep("confirmation");
     } catch (error) {

@@ -21,11 +21,11 @@ router.post("/", async (req, res) => {
       });
     }
 
-    console.log("📌 Fetched Users for Matching:", users);
+    // console.log("📌 Fetched Users for Matching:", users);
 
     const { matchedPairs, userIds } = findMatches(users);
 
-    console.log("✅ Matched Pairs:", matchedPairs);
+    // console.log("✅ Matched Pairs:", matchedPairs);
 
     // Store matches in the "matches" table
     if (matchedPairs.length > 0) {
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
         });
       }
 
-      console.log("✅ Matches inserted successfully:", matchedPairs);
+    //   console.log("✅ Matches inserted successfully:", matchedPairs);
     } else {
       console.log("⚠️ No matches found.");
     }
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
       });
     }
 
-    console.log("✅ Updated `ismatched` status for:", userIds);
+    // console.log("✅ Updated `ismatched` status for:", userIds);
     res.json({ message: "Matching completed successfully!" });
   } catch (error) {
     console.error("🚨 Error during matching:", error);

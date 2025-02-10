@@ -28,14 +28,14 @@ export default function Login({ onLogin }) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      <h1 className="text-2xl font-bold text-gray-700 mb-6">Welcome to MEC Cupid 💖</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-[32px] mb-6">Welcome to MEC Cupid</h1>
       <button
         onClick={handleGoogleLogin}
-        className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
+        className="bg-white rounded-[100px] px-4 py-2 text-[40px]"
         disabled={loading}
       >
-        {loading ? "Signing in..." : "Sign in with Google"}
+        {loading ? "Signing in..." : "Sign In"}
       </button>
     </div>
   );

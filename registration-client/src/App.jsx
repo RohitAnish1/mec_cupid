@@ -78,7 +78,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div className="bg-[#FAC2CD] font-luckiest">
       {step === "login" && <Login onLogin={() => setStep("name")} />}
       {step === "name" && (
         <NameForm onSubmit={(fname, lname) => { 

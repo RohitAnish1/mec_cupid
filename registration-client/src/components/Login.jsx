@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Logo from "../assets/fortitude_logo.svg"
 import { supabase } from "../../supabase"; // Use named import (curly brackets)
 
 export default function Login({ onLogin }) {
@@ -28,7 +29,10 @@ export default function Login({ onLogin }) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
+      <div className="overflow-hidden w-screen h-full absolute flex justify-center items-center">
+        <img src={'../../public/fortitude_logo.svg'} alt="Logo" className=" w-[50%] object-cover"/>
+      </div>
       <h1 className="text-[32px] mb-6">Welcome to MEC Cupid</h1>
       <button
         onClick={handleGoogleLogin}

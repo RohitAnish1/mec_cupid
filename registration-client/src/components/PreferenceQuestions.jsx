@@ -24,7 +24,7 @@ export default function PreferenceQuestions({ onComplete }) {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100">
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <h2 className="text-xl font-bold text-gray-700 mb-4">
                 {questions[currentQuestion].question}
             </h2>
@@ -33,13 +33,13 @@ export default function PreferenceQuestions({ onComplete }) {
                     <>
                         <input
                             type="number"
-                            className="border p-2 rounded-lg"
+                            className="border-none bg-white p-2 rounded-lg"
                             value={ageInput}
                             onChange={(e) => setAgeInput(e.target.value)}
                         />
                         <button
                             onClick={() => handleOptionSelect(Number(ageInput))}
-                            className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 transition mt-2"
+                            className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
                         >
                             Next
                         </button>
@@ -49,7 +49,7 @@ export default function PreferenceQuestions({ onComplete }) {
                         <button
                             key={index}
                             onClick={() => handleOptionSelect(option)}
-                            className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 transition"
+                            className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
                         >
                             {option}
                         </button>

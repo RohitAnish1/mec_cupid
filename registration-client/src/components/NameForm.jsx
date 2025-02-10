@@ -6,28 +6,28 @@ export default function NameForm({ onSubmit }) {
   const [number, setNumber] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      <h2 className="text-2xl font-bold text-gray-700 mb-4">Enter Your Name</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h2 className="text-2xl font-bold text-gray-700 mb-4">Enter Your Details</h2>
       <input
         type="text"
         placeholder="First Name"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
-        className="p-2 border border-gray-300 rounded mb-2"
+        className="p-2 bg-white rounded-[50px] px-5 border border-gray-300 rounded mb-2"
       />
       <input
         type="text"
         placeholder="Last Name"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
-        className="p-2 border border-gray-300 rounded mb-4"
+        className="p-2 bg-white rounded-[50px] px-5 border border-gray-300 rounded mb-4"
       />
       <input
         type="text"
         placeholder="Whatsapp Number"
         value={number}
         onChange={(e) => setNumber(e.target.value)}
-        className="p-2 border border-gray-300 rounded mb-4"
+        className="p-2 bg-white rounded-[50px] px-5 border border-gray-300 rounded mb-4"
       />
       <button
         onClick={() => onSubmit(firstName, lastName, number)}

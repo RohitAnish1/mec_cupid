@@ -69,7 +69,7 @@ export default function CompatibilityQuestions({ onComplete, firstName, lastName
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <h2 className="text-xl font-bold text-gray-700 mb-4">
                 {questions[currentQuestion].question}
             </h2>

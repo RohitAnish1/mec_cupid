@@ -46,7 +46,7 @@ export default function ApproveRegistrations() {
   const handleStartMatching = async () => {
         setMatchLoading(true)
         try {
-          const response = await fetch("https://mec-cupid.onrender.com/api/admin/match", { method: "POST" });
+          const response = await fetch("https://mec-cupid.onrender.com/api/match", { method: "POST" });
         if (!response.ok) {
             const message = await response.json();
             throw new Error(`HTTP error! Status: ${response.status} - ${message.message}`);

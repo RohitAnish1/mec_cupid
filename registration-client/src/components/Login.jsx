@@ -11,7 +11,7 @@ export default function Login({ onLogin }) {
     setLoading(true);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "http://localhost:5173" }, // Change this in production
+      options: { redirectTo: "https://mec-cupid.vercel.app/" }, // Change this in production
     });
 
     if (error) {

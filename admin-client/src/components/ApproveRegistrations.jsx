@@ -14,7 +14,7 @@ export default function ApproveRegistrations() {
     const fetchRegistrations = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/admin/pending");
+        const response = await fetch("https://mec-cupid.onrender.com/api/admin/pending");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

@@ -37,7 +37,7 @@ export default function Login({ onLogin }) {
         <h4 className="text-xl absolute text-center w-full top-36 text-white font-medium">Fortitude MEC</h4>
       </div>
       <h1 className="text-[32px] mb-2 pt-4 mt-10">Welcome to MEC Cupid</h1>
-      <img src={LoginImage} alt="Login Image" className="rounded-xl mb-6 w-[80%] xs:w-[60%] sm:w-[50%]" />
+      <img src={LoginImage} alt="Login Image" className="rounded-xl mb-6 w-[80%] xs:w-[60%] sm:w-[50%] md:w-[37%] lg:w-[30%] xl:w-[25%]" />
       <button
         onClick={handleGoogleLogin}
         className="bg-white rounded-[100px] px-4 py-2 text-[40px] flex items-center gap-2 max-h-[68px]"

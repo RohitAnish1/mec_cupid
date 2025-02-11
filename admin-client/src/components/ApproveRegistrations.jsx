@@ -33,7 +33,7 @@ export default function ApproveRegistrations() {
 
   const handleApprove = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/admin/approve/${id}`, {
+      await fetch(`https://mec-cupid.onrender.com/api/admin/approve/${id}`, {
         method: "PUT",
       });
       setRegistrations(registrations.filter((reg) => reg.id !== id));
@@ -46,7 +46,7 @@ export default function ApproveRegistrations() {
   const handleStartMatching = async () => {
         setMatchLoading(true)
         try {
-          const response = await fetch("http://localhost:5000/api/match", { method: "POST" });
+          const response = await fetch("https://mec-cupid.onrender.com/api/admin/match", { method: "POST" });
         if (!response.ok) {
             const message = await response.json();
             throw new Error(`HTTP error! Status: ${response.status} - ${message.message}`);

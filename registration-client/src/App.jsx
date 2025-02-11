@@ -5,10 +5,11 @@ import CompatibilityQuestions from "./components/CompatibilityQuestions";
 import ConfirmationPage from "./components/ConfirmationPage";
 import { supabase } from "../supabase"; // Ensure correct import
 import PreferenceQuestions from "./components/PreferenceQuestions";
+import Guidelines from "./components/Guidelines";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [step, setStep] = useState("login"); // Default step
+  const [step, setStep] = useState("guidelines"); // Default step
   const [firstName, setFirstName] = useState(""); // Store first name
   const [lastName, setLastName] = useState(""); // Store last name
   const [number, setNumber] = useState(""); // Store number
@@ -16,32 +17,34 @@ export default function App() {
   const [interests, setInterests] = useState([]); // Store interests
 
   useEffect(() => {
-    const checkUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
+    if (step !== "guidelines") {
+      const checkUser = async () => {
+        const { data, error } = await supabase.auth.getUser();
+        
+        if (error || !data?.user) {
+          setStep("login"); // Show login if no user
+        } else {
+          setUser(data.user);
+          setStep("name"); // Move to name entry step
+        }
+      };
 
-      if (error || !data?.user) {
-        setStep("login"); // Show login if no user
-      } else {
-        setUser(data.user);
-        setStep("name"); // Move to name entry step
-      }
-    };
+        checkUser();
 
-    checkUser();
+      const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+        if (session?.user) {
+          setUser(session.user);
+          setStep("name");
+        } else {
+          setUser(null);
+          setStep("login"); // If logged out, go back to login
+        }
+      });
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setUser(session.user);
-        setStep("name");
-      } else {
-        setUser(null);
-        setStep("login"); // If logged out, go back to login
-      }
-    });
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
+      return () => {
+        authListener.subscription.unsubscribe();
+      };
+    }
   }, []);
 
   const handlePreferenceSubmit = async (finalPreferences) => {
@@ -89,6 +92,7 @@ export default function App() {
 
   return (
     <div className="bg-[#FAC2CD] font-luckiest">
+      {step === "guidelines" && <Guidelines onContinue={() => setStep("login")} />}
       {step === "login" && <Login onLogin={() => setStep("name")} />}
       {step === "name" && (
         <NameForm onSubmit={(fname, lname, number) => { 

@@ -9,7 +9,7 @@ import Guidelines from "./components/Guidelines";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [step, setStep] = useState("guidelines"); // Default step
+  const [step, setStep] = useState("login"); // Default step
   const [firstName, setFirstName] = useState(""); // Store first name
   const [lastName, setLastName] = useState(""); // Store last name
   const [number, setNumber] = useState(""); // Store number
@@ -17,34 +17,32 @@ export default function App() {
   const [interests, setInterests] = useState([]); // Store interests
 
   useEffect(() => {
-    if (step !== "guidelines") {
-      const checkUser = async () => {
-        const { data, error } = await supabase.auth.getUser();
-        
-        if (error || !data?.user) {
-          setStep("login"); // Show login if no user
-        } else {
-          setUser(data.user);
-          setStep("name"); // Move to name entry step
-        }
-      };
+    const checkUser = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      
+      if (error || !data?.user) {
+        setStep("login"); // Show login if no user
+      } else {
+        setUser(data.user);
+        setStep("guidelines"); // Move to name entry step
+      }
+    };
 
-        checkUser();
+      checkUser();
 
-      const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-        if (session?.user) {
-          setUser(session.user);
-          setStep("name");
-        } else {
-          setUser(null);
-          setStep("login"); // If logged out, go back to login
-        }
-      });
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+        setStep("guidelines");
+      } else {
+        setUser(null);
+        setStep("login"); // If logged out, go back to login
+      }
+    });
 
-      return () => {
-        authListener.subscription.unsubscribe();
-      };
-    }
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
   const handlePreferenceSubmit = async (finalPreferences) => {
@@ -65,7 +63,7 @@ export default function App() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch("https://mec-cupid.onrender.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,8 +90,8 @@ export default function App() {
 
   return (
     <div className="bg-[#FAC2CD] font-luckiest">
-      {step === "guidelines" && <Guidelines onContinue={() => setStep("login")} />}
-      {step === "login" && <Login onLogin={() => setStep("name")} />}
+      {step === "login" && <Login onLogin={() => setStep("guidelines")} />}
+      {step === "guidelines" && <Guidelines onContinue={() => setStep("name")} />}
       {step === "name" && (
         <NameForm onSubmit={(fname, lname, number) => { 
           setFirstName(fname); 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../assets/fortitude_logo.svg"
+import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../../supabase"; // Use named import (curly brackets)
+import LoginImage from "../assets/login_page_image.svg"
 
 export default function Login({ onLogin }) {
   const [loading, setLoading] = useState(false);
@@ -29,17 +31,20 @@ export default function Login({ onLogin }) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
-      <div className="overflow-hidden w-screen h-full absolute flex justify-center items-center">
-        <img src={'../../public/fortitude_logo.svg'} alt="Logo" className=" w-[50%] object-cover"/>
+    <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
+      <div className="absolute -top-10 flex flex-col gap-2 h-20">
+        <img src={Logo} alt="Logo"/>
+        <h4 className="text-xl absolute text-center w-full top-36 text-white font-medium">Fortitude MEC</h4>
       </div>
-      <h1 className="text-[32px] mb-6">Welcome to MEC Cupid</h1>
+      <h1 className="text-[32px] mb-2 pt-4">Welcome to MEC Cupid</h1>
+      <img src={LoginImage} alt="Login Image" className="rounded-xl mb-6 w-[90vw]" />
       <button
         onClick={handleGoogleLogin}
-        className="bg-white rounded-[100px] px-4 py-2 text-[40px]"
+        className="bg-white rounded-[100px] px-4 py-2 text-[40px] flex items-center gap-2 max-h-[68px]"
         disabled={loading}
       >
-        {loading ? "Signing in..." : "Sign In"}
+        <FcGoogle className="text-4xl" />
+        <span className="pt-2">{loading ? "Signing in..." : "Sign In"}</span>
       </button>
     </div>
   );

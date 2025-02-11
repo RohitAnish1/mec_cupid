@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DetailsImage from "../assets/details.png"
 
 export default function NameForm({ onSubmit }) {
   const [firstName, setFirstName] = useState("");
@@ -6,35 +7,55 @@ export default function NameForm({ onSubmit }) {
   const [number, setNumber] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h2 className="text-2xl font-bold text-gray-700 mb-4">Enter Your Details</h2>
-      <input
-        type="text"
-        placeholder="First Name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        className="p-2 bg-white rounded-[50px] px-5 border border-gray-300 rounded mb-2"
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#FAC2CD] relative">
+      <img 
+        src={DetailsImage} 
+        alt="Details decoration" 
+        className="absolute bottom-0 left-0 z-0"
       />
-      <input
-        type="text"
-        placeholder="Last Name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        className="p-2 bg-white rounded-[50px] px-5 border border-gray-300 rounded mb-4"
-      />
-      <input
-        type="text"
-        placeholder="Whatsapp Number"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-        className="p-2 bg-white rounded-[50px] px-5 border border-gray-300 rounded mb-4"
-      />
-      <button
-        onClick={() => onSubmit(firstName, lastName, number)}
-        className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
-      >
-        Next
-      </button>
+      
+      <div className="bg-black text-white px-8 py-2 rounded-full mb-4 relative z-10">
+        <h2 className="text-2xl font-black">ENTER YOUR DETAILS:</h2>
+      </div>
+
+      <div className="w-full max-w-md px-4 relative z-10">
+        <label className="block text-black font-black mb-2 text-xl">
+          ENTER FIRST NAME:
+        </label>
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="w-full p-3 bg-white rounded-full border-none mb-4"
+        />
+
+        <label className="block text-black font-black mb-2 text-xl">
+          ENTER LAST NAME:
+        </label>
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          className="w-full p-3 bg-white rounded-full border-none mb-4"
+        />
+
+        <label className="block text-black font-black mb-2 text-xl">
+          ENTER WHATSAPP NUMBER:
+        </label>
+        <input
+          type="text"
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
+          className="w-full p-3 bg-white rounded-full border-none mb-4"
+        />
+
+        <button
+          onClick={() => onSubmit(firstName, lastName, number)}
+          className="w-full bg-black text-white font-black text-xl py-4 rounded-full hover:opacity-90 transition"
+        >
+          NEXT
+        </button>
+      </div>
     </div>
   );
 }

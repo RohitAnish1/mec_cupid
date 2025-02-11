@@ -50,9 +50,12 @@ export default function App() {
     setStep("compatibility");
   }
 
-  const handleFormSubmit = async (finalInterests) => {
+  const handleCompatibilitySubmit = async (finalInterests) => {
     setInterests(finalInterests);
+    setStep("submit");
+  }
 
+  const handleFormSubmit = async () => {
     // console.log("📌 Submitting Full Data:", { firstName, lastName, number, interests: finalInterests });
 
     try {
@@ -74,7 +77,7 @@ export default function App() {
           lastName,
           number,
           preferences: preferences,
-          interests: finalInterests, // Send name and interests together
+          interests: interests, // Send name and interests together
         }),
       });
 
@@ -103,8 +106,24 @@ export default function App() {
       {step === "preferences" && <PreferenceQuestions onComplete={handlePreferenceSubmit} />}
       {step === "compatibility" && (
         <CompatibilityQuestions 
-          onComplete={handleFormSubmit} // Send everything together
+          onComplete={handleCompatibilitySubmit} // Send everything together
         />
+      )}
+      {step === "submit" && (
+        <div className="flex flex-col items-center justify-center min-h-screen p-6">
+          <h2 className="block text-black font-black text-xl mb-4">
+            Are you sure you want to enter matchmaking?
+          </h2>
+          <p className="block text-black font-black text-xl mb-4">
+            Once submitted, your preferences will be used to find a compatible match.
+          </p>
+          <button
+            onClick={handleFormSubmit}
+            className="w-auto bg-black text-white font-black px-2 text-xl py-4 rounded-full hover:opacity-90 transition"
+          >
+            Yes, Submit
+          </button>
+        </div>        
       )}
       {step === "confirmation" && <ConfirmationPage />}
     </div>

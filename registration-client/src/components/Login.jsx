@@ -44,7 +44,7 @@ export default function Login({ onLogin }) {
         disabled={loading}
       >
         <FcGoogle className="text-4xl" />
-        <span className="pt-2">{loading ? "Signing in..." : "Sign In"}</span>
+        <span className="pt-2">{loading ? "Signing in..." : "Sign In"} </span>
       </button>
     </div>
   );

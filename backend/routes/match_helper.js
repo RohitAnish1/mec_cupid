@@ -106,7 +106,6 @@ const calculateCompatibilityScore = (user1, user2) => {
 };
 
 // Main matching function
-// Previous helper functions remain the same
 const findMatches = (users) => {
   const eligibleUsers = users.filter(
     (user) => user.approved && !user.ismatched
@@ -114,7 +113,11 @@ const findMatches = (users) => {
   const matchedUsers = new Set();
   const finalMatches = [];
 
-  // First, calculate compatibility scores for ALL possible pairs
+  // Early return if no eligible users
+  if (eligibleUsers.length === 0) {
+    return { matchedPairs: [], userIds: matchedUsers };
+  }
+
   const compatibilityMatrix = {};
 
   // Initialize matrix for each user
@@ -146,7 +149,8 @@ const findMatches = (users) => {
     let bestMatchId = null;
 
     Object.entries(userScores).forEach(([potentialMatchId, score]) => {
-      if (!matchedUsers.has(potentialMatchId) && score > bestScore) {
+      // Only consider valid matches (score > 0)
+      if (!matchedUsers.has(potentialMatchId) && score > bestScore && score > 0) {
         bestScore = score;
         bestMatchId = potentialMatchId;
       }
@@ -202,6 +206,29 @@ const findMatches = (users) => {
       // If no mutual best match found, break to avoid infinite loop
       // This could happen with last unpaired user
       break;
+    }
+  }
+
+  // Second pass: Match remaining users based only on basic preferences
+  const remainingUsers = eligibleUsers.filter(user => !matchedUsers.has(user.id));
+  
+  for (let i = 0; i < remainingUsers.length; i++) {
+    const user1 = remainingUsers[i];
+    if (matchedUsers.has(user1.id)) continue;
+
+    for (let j = i + 1; j < remainingUsers.length; j++) {
+      const user2 = remainingUsers[j];
+      if (matchedUsers.has(user2.id)) continue;
+
+      if (checkPreferenceMatch(user1, user2)) {
+        finalMatches.push({
+          user1_id: user1.id,
+          user2_id: user2.id,
+        });
+        matchedUsers.add(user1.id);
+        matchedUsers.add(user2.id);
+        break;
+      }
     }
   }
 
